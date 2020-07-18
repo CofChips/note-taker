@@ -29,12 +29,13 @@ app.post("/api/notes", function (req, res) {
     const newArray = [];
     let newNote = req.body;
     console.log(newNote);
-    newNote.id="0";
+    newNote.id = "0";
     newArray.push(newNote);
     fs.readFile("db/db.json", function (error, data) {
         let temp = JSON.parse(data);
         for (let i = 0; i < temp.length; i++) {
-            temp[i].id=(i+1)
+            let num = (i + 1)
+            temp[i].id = num.toString();
             newArray.push(temp[i])
         }
         console.log(newArray);
@@ -52,11 +53,38 @@ app.post("/api/notes", function (req, res) {
 
 })
 
-app.delete("/api/notes/:id", function (req,res){
-    var chosen = req.params.id;
+app.delete("/api/notes/:id", function (req, res) {
+    let chosen = req.params.id;
     // var queryParams = req.query;
     // console.log(queryParams);
+    const newArray = [];
+    const updateArray = [];
+
     console.log(chosen);
+    fs.readFile("db/db.json", function (error, data) {
+        let temp = JSON.parse(data);
+        for (let i = 0; i < temp.length; i++) {
+            newArray.push(temp[i])
+        }
+
+        console.log(newArray);
+
+        for (let j = 0; j < newArray.length; j++) {
+            if (newArray[j].id === chosen) {
+                newArray.splice(j, 1)
+                console.log(newArray)
+            }
+        }
+        fs.writeFile("db/db.json", JSON.stringify(newArray), function (error, data) {
+            if (error) throw error;
+            console.log("Check the file")
+        })
+
+        res.json(newArray)
+
+
+
+    })
 })
 
 app.get("*", function (req, res) {
