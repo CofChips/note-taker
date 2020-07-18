@@ -55,10 +55,8 @@ app.post("/api/notes", function (req, res) {
 
 app.delete("/api/notes/:id", function (req, res) {
     let chosen = req.params.id;
-    // var queryParams = req.query;
-    // console.log(queryParams);
+
     const newArray = [];
-    const updateArray = [];
 
     console.log(chosen);
     fs.readFile("db/db.json", function (error, data) {
@@ -81,8 +79,6 @@ app.delete("/api/notes/:id", function (req, res) {
         })
 
         res.json(newArray)
-
-
 
     })
 })
