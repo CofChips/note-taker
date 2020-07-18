@@ -40,16 +40,24 @@ app.post("/api/notes", function (req, res) {
             if (error) throw error;
             console.log("Check the file")
         })
-        fs.readFile("db/db.json", function (error, data) {
-            let sendData = JSON.parse(data);
-            res.json(sendData);
-        })
+        // fs.readFile("db/db.json", function (error, data) {
+        //     let sendData = JSON.parse(data);
+        //     res.json(sendData);
+        // })
+        res.json(newArray)
 
     })
 
 
     console.log(newArray)
 
+})
+
+app.delete("/api/notes/:id", function (req,res){
+    var chosen = req.params.id;
+    // var queryParams = req.query;
+    // console.log(queryParams);
+    console.log(chosen);
 })
 
 app.get("*", function (req, res) {
