@@ -29,10 +29,12 @@ app.post("/api/notes", function (req, res) {
     const newArray = [];
     let newNote = req.body;
     console.log(newNote);
+    newNote.id="0";
     newArray.push(newNote);
     fs.readFile("db/db.json", function (error, data) {
         let temp = JSON.parse(data);
         for (let i = 0; i < temp.length; i++) {
+            temp[i].id=(i+1)
             newArray.push(temp[i])
         }
         console.log(newArray);
@@ -40,10 +42,7 @@ app.post("/api/notes", function (req, res) {
             if (error) throw error;
             console.log("Check the file")
         })
-        // fs.readFile("db/db.json", function (error, data) {
-        //     let sendData = JSON.parse(data);
-        //     res.json(sendData);
-        // })
+
         res.json(newArray)
 
     })
