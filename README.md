@@ -2,6 +2,19 @@
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/CofChips/note-taker)
 
+## Description
+Note Taker is an app for users to keep their notes. Users can write new notes, read existing notes, and deletes notes once they no longer wish to keep them.
+
+## Table of Contents
+* [Background](#background)
+* [Approach](#approach)
+* [Tools](#tools)
+* [Site](#site)
+* [License](#license)
+* [Contributing](#contributing)
+* [Questions](#questions)
+* [Authors](#authors)
+
 ## Background
 The objective of this exercise was to build an express backend as part of an application that writes, saves, and deletes notes using a JSON file.
 
@@ -16,8 +29,7 @@ Application should allow users to delete previously saved notes.
 ```
 
 ## Site Pictures
-![Image](screenshots/site1.png)
-![Image](screenshots/site2.png)
+![Image](screenshots/demo.gif)
 
 ## Approach
 
@@ -116,7 +128,7 @@ app.delete("/api/notes/:id", function (req, res) {
 * [Express](https://expressjs.com/)
 
 
-## Deployed Link
+## Site
 
 * [See Live Site](https://nameless-tundra-10320.herokuapp.com/)
 

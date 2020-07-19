@@ -1,16 +1,13 @@
 const express = require("express");
 const fs = require("fs");
-const { send } = require("process");
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-let testData = [{ "title": "Test Title", "text": "Test text" }];
-
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// required to connect external css and js files
 app.use(express.static(__dirname + "/public"));
 
 
@@ -18,6 +15,7 @@ app.get("/notes", function (req, res) {
     res.sendFile(__dirname + "/public/notes.html");
 })
 
+// route to populate note list in html page
 app.get("/api/notes", function (req, res) {
     fs.readFile("db/db.json", function (error, data) {
         let sendData = JSON.parse(data);
@@ -25,6 +23,7 @@ app.get("/api/notes", function (req, res) {
     })
 })
 
+// route to capture new notes and repopulate list in both html and json.db
 app.post("/api/notes", function (req, res) {
     const newArray = [];
     let newNote = req.body;
@@ -53,6 +52,7 @@ app.post("/api/notes", function (req, res) {
 
 })
 
+// route to delete specified note
 app.delete("/api/notes/:id", function (req, res) {
     let chosen = req.params.id;
 
@@ -83,6 +83,7 @@ app.delete("/api/notes/:id", function (req, res) {
     })
 })
 
+// route for urls that are note specified above
 app.get("*", function (req, res) {
     res.sendFile(__dirname + "/public/index.html");
 })
@@ -94,5 +95,3 @@ app.listen(PORT, function (req, res) {
 })
 
 
-
-// [{"title":"Test Title","text":"Test text"}]
